@@ -24,7 +24,7 @@ export default function Catalogo() {
         descricao:
           'Leitor digital com firmware atualizado. Bateria de longa duracao para leituras criticas.',
         imagem:
-          'https://images.unsplash.com/photo-1592496001020-d31bd830651f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1555631545-9dc21031669b?q=80&w=992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
       {
         id: 3,
@@ -33,7 +33,7 @@ export default function Catalogo() {
         descricao:
           'Kit completo de reparo e limpeza. Essencial para quem gosta de fazer a propria manutencao em casa.',
         imagem:
-          'https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1661745805708-9c4a831545a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
     ]
 
@@ -51,12 +51,16 @@ export default function Catalogo() {
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-10">
-      <header className="mb-10 text-center">
-        <h1 className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-4xl font-extrabold text-transparent">
-          Catalogo Dinamico
+      <header className="relative mb-14 text-center">
+        {/* Efeito de brilho difuso atrás do título */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-24 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/20 blur-[80px]"></div>
+
+        <h1 className="inline-block bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text pb-2 text-5xl font-extrabold leading-[1.1] tracking-tight text-transparent drop-shadow-sm md:text-6xl">
+          Catálogo Dinâmico
         </h1>
-        <p className="mt-2 text-slate-400">
-          Gerenciamento de produtos com React e Tailwind
+
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-400">
+          Gerenciamento de produtos variados
         </p>
       </header>
 

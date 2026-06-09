@@ -28,77 +28,92 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-10 rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-md"
+      className="mb-10 relative overflow-hidden rounded-2xl border border-white/10 bg-slate-800/40 p-8 shadow-2xl backdrop-blur-xl transition-all"
     >
-      <h2 className="mb-6 border-b border-slate-700 pb-2 text-2xl font-bold text-white">
-        Cadastrar Novo Produto
-      </h2>
+      {/* Efeito de brilho de fundo (opcional, dá um toque premium) */}
+      <div className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full bg-emerald-500/10 blur-3xl"></div>
 
-      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-300">
-            Nome do Produto *
+      <div className="mb-8">
+        <h2 className="text-3xl font-extrabold tracking-tight text-white">
+          Novo Produto
+        </h2>
+        <p className="mt-1 text-sm text-slate-400">
+          Preencha os detalhes para adicionar ao catálogo.
+        </p>
+      </div>
+
+      <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="group">
+          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400 transition-colors group-focus-within:text-emerald-400">
+            Nome do Produto <span className="text-emerald-500">*</span>
           </label>
           <input
             type="text"
             required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="w-full rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-            placeholder="Ex: Teclado Mecanico"
+            className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-600 transition-all duration-300 focus:border-emerald-500/50 focus:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+            placeholder="Ex: Teclado Mecânico"
           />
         </div>
 
-        <div>
-          <label className="mb-1 block text-sm font-medium text-slate-300">
-            Preco (R$) *
+        <div className="group">
+          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400 transition-colors group-focus-within:text-emerald-400">
+            Preço (R$) <span className="text-emerald-500">*</span>
           </label>
-          <input
-            type="number"
-            required
-            step="0.01"
-            min="0"
-            value={preco}
-            onChange={(e) => setPreco(e.target.value)}
-            className="w-full rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-            placeholder="Ex: 250.00"
-          />
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-500">
+              R$
+            </span>
+            <input
+              type="number"
+              required
+              step="0.01"
+              min="0"
+              value={preco}
+              onChange={(e) => setPreco(e.target.value)}
+              className="w-full rounded-xl border border-white/5 bg-slate-900/50 py-3 pl-10 pr-4 text-white placeholder-slate-600 transition-all duration-300 focus:border-emerald-500/50 focus:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+              placeholder="0.00"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="mb-4">
-        <label className="mb-1 block text-sm font-medium text-slate-300">
+      <div className="group mb-6">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400 transition-colors group-focus-within:text-emerald-400">
           URL da Imagem
         </label>
         <input
           type="url"
           value={imagem}
           onChange={(e) => setImagem(e.target.value)}
-          className="w-full rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-          placeholder="https://..."
+          className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-600 transition-all duration-300 focus:border-emerald-500/50 focus:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+          placeholder="https://sua-imagem.com/foto.jpg"
         />
       </div>
 
-      <div className="mb-6">
-        <label className="mb-1 block text-sm font-medium text-slate-300">
-          Descricao *
+      <div className="group mb-8">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400 transition-colors group-focus-within:text-emerald-400">
+          Descrição <span className="text-emerald-500">*</span>
         </label>
         <textarea
           required
           rows="3"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
-          className="w-full rounded-lg border border-slate-600 bg-slate-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
-          placeholder="Detalhes do produto..."
+          className="w-full resize-none rounded-xl border border-white/5 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-600 transition-all duration-300 focus:border-emerald-500/50 focus:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+          placeholder="Escreva os detalhes técnicos e diferenciais do produto..."
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full rounded-lg bg-emerald-600 px-8 py-3 font-bold text-white transition-colors hover:bg-emerald-500 md:w-auto"
-      >
-        Adicionar ao Catalogo
-      </button>
+      <div className="flex justify-end pt-2">
+        <button
+          type="submit"
+          className="w-full transform rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-8 py-3.5 font-bold tracking-wide text-white shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] focus:outline-none focus:ring-4 focus:ring-emerald-500/30 md:w-auto"
+        >
+          Adicionar ao Catálogo
+        </button>
+      </div>
     </form>
   )
 }
