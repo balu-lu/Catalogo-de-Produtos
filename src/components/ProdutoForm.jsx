@@ -5,20 +5,33 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
   const [preco, setPreco] = useState('')
   const [descricao, setDescricao] = useState('')
   const [imagem, setImagem] = useState('')
+  
+  // Novo estado para o feedback de erro
+  const [erro, setErro] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    // Validação com .trim() conforme feedback
+    if (!nome.trim() || !descricao.trim() || !preco) {
+      setErro('Por favor, preencha todos os campos obrigatórios com informações válidas.')
+      return
+    }
+
+    // Limpa o erro se a validação passar
+    setErro('')
+
     const novoProduto = {
       id: Date.now(),
-      nome,
+      nome: nome.trim(),
       preco: Number.parseFloat(preco),
-      descricao,
+      descricao: descricao.trim(),
       imagem: imagem || 'https://via.placeholder.com/400x300?text=Novo+Produto',
     }
 
     aoAdicionarProduto(novoProduto)
 
+    // Reset dos campos
     setNome('')
     setPreco('')
     setDescricao('')
@@ -30,7 +43,6 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
       onSubmit={handleSubmit}
       className="mb-10 relative overflow-hidden rounded-2xl border border-white/10 bg-slate-800/40 p-8 shadow-2xl backdrop-blur-xl transition-all"
     >
-      {/* Efeito de brilho de fundo (opcional, dá um toque premium) */}
       <div className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full bg-emerald-500/10 blur-3xl"></div>
 
       <div className="mb-8">
@@ -42,6 +54,13 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
         </p>
       </div>
 
+      {/* FEEDBACK VISUAL DE ERRO */}
+      {erro && (
+        <div className="mb-6 rounded-lg bg-red-500/10 p-4 border border-red-500/50">
+          <p className="text-sm font-semibold text-red-400">{erro}</p>
+        </div>
+      )}
+
       <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="group">
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400 transition-colors group-focus-within:text-emerald-400">
@@ -49,7 +68,6 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
           </label>
           <input
             type="text"
-            required
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             className="w-full rounded-xl border border-white/5 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-600 transition-all duration-300 focus:border-emerald-500/50 focus:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
@@ -67,7 +85,6 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
             </span>
             <input
               type="number"
-              required
               step="0.01"
               min="0"
               value={preco}
@@ -97,7 +114,6 @@ export default function ProdutoForm({ aoAdicionarProduto }) {
           Descrição <span className="text-emerald-500">*</span>
         </label>
         <textarea
-          required
           rows="3"
           value={descricao}
           onChange={(e) => setDescricao(e.target.value)}
